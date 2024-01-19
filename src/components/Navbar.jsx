@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from '../assets/logo.png'
 
 const NavBar = () => {
   return (
@@ -9,7 +10,7 @@ const NavBar = () => {
           <li>
             <NavLink to="/">
               <img
-                src="src\assets\cryptocurrency.png"
+                src={logo}
                 alt=""
                 className="w-16 h-16 "
               />
