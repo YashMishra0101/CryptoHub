@@ -9,7 +9,7 @@ const NavBar = () => {
           <li>
             <NavLink to="/">
               <img
-                src="src\assets\cryptocurrency.png"
+                src="src/assets/cryptocurrency.png"
                 alt=""
                 className="w-16 h-16 "
               />
