@@ -7,17 +7,17 @@ const ResetPassword = () => {
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 mb-14 mt-10 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl text-center font-bold md:text-2xl text-white">
+              <h1 className="text-center font-bold text-2xl text-white">
                 Reset Your Password
               </h1>
               <form
                 className="space-y-4 md:space-y-6"
                 onSubmit={() => navigate("/")}>
-                <div>
+                <div className="mt-5">
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
-                   Enter Your email
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white ">
+                   Enter your email 
                   </label>
                   <input
                     type="email"

@@ -58,29 +58,30 @@ const Login = () => {
                         aria-describedby="remember"
                         type="checkbox"
                         onChange={handleCheckboxChange}
-                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 cursor-pointer"
                       />
                     </div>
-                    <div className="ml-2 text-base">
-                      <label htmlFor="remember" class="text-blue-500 font-medium ">
+                    <div className="ml-2 text-base cursor-pointer">
+                      <label htmlFor="remember" class="text-blue-500 font-medium cursor-pointer ">
                         Show password
                       </label>
                     </div>
                   </div>
-                  <span
-                    className="text-base font-medium text-blue-600 hover:underline ml-[3.5rem] lg:ml-[3.1rem] xl:ml-[3.1rem] text-center">
+                  <div
+                    className="text-base font-medium text-blue-600 hover:underline ml-[3.5rem] lg:ml-[3.1rem] xl:ml-[3.1rem] text-center pb-1 cursor-pointer"
+                    onClick={()=>navigate("/resetPassword")}>
                     Forgot password ?
-                  </span>
+                  </div>
                 </div>
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-1">
                   Sign in
                 </button>
-                <p className="text-base font-light text-gray-500 dark:text-gray-400">
+                <p className="text-base font-light text-gray-500 dark:text-gray-400 cursor-pointer">
                   Don’t have an account yet ?{" "}
                   <span
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     onClick={() => navigate("/signup")}>
                     Sign up
                   </span>

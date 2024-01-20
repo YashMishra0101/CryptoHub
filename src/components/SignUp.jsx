@@ -71,13 +71,13 @@ const SignUp = () => {
                     id="terms"
                     type="checkbox"
                     onChange={handleCheckboxChange}
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 cursor-pointer"
                   />
                 </div>
-                <div className="ml-2 text-base mb-1">
+                <div className="ml-2 text-base mb-1 ">
                   <label
                     htmlFor="terms"
-                    className="font-medium text-primary-600  text-blue-500">
+                    className="font-medium text-primary-600  text-blue-500 cursor-pointer">
                     Show Password
                   </label>
                 </div>
@@ -87,10 +87,10 @@ const SignUp = () => {
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Create an account
               </button>
-              <p className="text-base font-light text-gray-500 dark:text-gray-400">
+              <p className="text-base font-light text-gray-500 dark:text-gray-400 cursor-pointer">
                 Already have an account ? {""}
                 <span 
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500 "
                   onClick={()=>navigate("/login")}>
                   Login here
                 </span>
