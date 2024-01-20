@@ -12,6 +12,7 @@ import {
   SignUp,
   Bookmarks,
   UserAccount,
+  ResetPassword
 } from "./components/index.js";
 
 import {
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="news" element={<News />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="resetPassword" element={<ResetPassword />} />
     </Route>
   )
 );

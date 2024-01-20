@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .active{
-    color:red;
-    font-size: x-large;
-} */
+.active{
+    color:#4299e1;;
+}
