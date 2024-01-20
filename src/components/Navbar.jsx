@@ -10,6 +10,11 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -69,32 +74,32 @@ const NavBar = () => {
             id="navbar-default">
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="/">
+              to="/" onClick={closeMenu}>
               Home
             </NavLink>
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="cryptocurrencies">
+              to="cryptocurrencies" onClick={closeMenu}>
               Cryptocurrencies
             </NavLink>
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="exchange">
+              to="exchange" onClick={closeMenu}>
               Exchange
             </NavLink>
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="news">
+              to="news" onClick={closeMenu}>
               News
             </NavLink>
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="login">
+              to="login" onClick={closeMenu}>
               Login
             </NavLink>
             <NavLink
               className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-              to="signup">
+              to="signup" onClick={closeMenu}>
               Sign Up
             </NavLink>
           </div>
