@@ -6,6 +6,7 @@ import Home from "../pages/Home"
 const CoinrankingApi = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const API_KEY = import.meta.env.VITE_Coinranking_API_KEY;
 
   const option = {
     method: "GET",
@@ -20,7 +21,7 @@ const CoinrankingApi = () => {
       offset: "0",
     },
     headers: {
-      "X-RapidAPI-Key": "49440a1be2mshb78cd971bc1d18ep13666djsn7d58a9b87d32",
+      "X-RapidAPI-Key":{API_KEY },
       "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
     },
   };
