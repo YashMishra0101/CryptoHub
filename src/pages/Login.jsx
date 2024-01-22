@@ -13,10 +13,10 @@ const Login = () => {
   return (
     <div>
       <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-7 mx-auto md:h-screen lg:py-0">
           <div className="w-full  rounded-lg shadow dborder md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 mb-14 mt-10 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl text-center font-bold md:text-2xl text-white">
+              <h1 className="md:text-center font-bold text-2xl text-white">
                 Log in to your account
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={()=>navigate('/')}>
@@ -61,16 +61,16 @@ const Login = () => {
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 cursor-pointer"
                       />
                     </div>
-                    <div className="ml-2 text-base cursor-pointer">
+                    <div className="ml-2 mb-1  text-base cursor-pointer ">
                       <label htmlFor="remember" class="text-blue-500 font-medium cursor-pointer ">
                         Show password
                       </label>
                     </div>
                   </div>
                   <div
-                    className="text-base font-medium text-blue-600 hover:underline ml-[3.5rem] lg:ml-[3.1rem] xl:ml-[3.1rem] text-center pb-1 cursor-pointer"
+                    className="text-base font-medium text-blue-600 hover:underline ml-[3.5rem] lg:ml-[3.1rem] xl:ml-[3.1rem] text-center cursor-pointer pb-1"
                     onClick={()=>navigate("/resetPassword")}>
-                    Forgot password ?
+                    Forgot password 
                   </div>
                 </div>
                 <button

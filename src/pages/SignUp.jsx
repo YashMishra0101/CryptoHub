@@ -13,10 +13,10 @@ const SignUp = () => {
 
   return (
     <div className="bg-gray-900 min-h-screen">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full  rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 mb-16 mt-10">
+      <div className="flex flex-col items-center justify-center px-6 py-5 md:py-8 mx-auto md:h-screen lg:py-0">
+        <div className="w-full  rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 mb-[4.3rem] mt-10">
           <div className="pr-4 pl-4 space-y-4 pt-2 pb-3">
-            <h1 className="text-center text-2xl font-bold  md:text-2xl text-white">
+            <h1 className="text-center font-bold  text-2xl text-white">
               Create account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={()=>navigate('/login')}>
@@ -74,7 +74,7 @@ const SignUp = () => {
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 cursor-pointer"
                   />
                 </div>
-                <div className="ml-2 text-base mb-1 ">
+                <div className="ml-2 text-base md:mb-1">
                   <label
                     htmlFor="terms"
                     className="font-medium text-primary-600  text-blue-500 cursor-pointer">
