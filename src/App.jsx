@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 
 function App() {
-  return <div>
+  return <div className="bg-gray-200">
    <NavBar/>
    <Outlet/>
   </div>

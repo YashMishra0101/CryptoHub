@@ -29,8 +29,8 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Home/>} />
-      <Route path="cryptocurrencies" element={<CoinrankingApi/>} />
+      <Route index element={<CoinrankingApi/>} />
+      <Route path="cryptocurrencies" element={<Cryptocurrencies/>} />
       <Route path="exchange" element={<Exchange />} />
       <Route path="news" element={<News />} />
       <Route path="login" element={<Login />} />

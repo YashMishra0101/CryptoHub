@@ -7,5 +7,5 @@ export {default as SignUp}from '../pages/SignUp'
 export {default as Bookmarks} from '../pages/Bookmarks'
 export {default as UserAccount}from '../pages/UserAccount'
 export {default as ResetPassword}from '../pages/ResetPassword'
-export {default as CoinrankingApi}from '../API/CoinrankingApi'
+export {default as CoinrankingApi}from '../APIs/CoinrankingApi'
 
