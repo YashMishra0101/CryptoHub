@@ -106,7 +106,7 @@ const Home = ({ data, loading }) => {
             <input
               type="search"
               id="default-search"
-              class="block w-full p-4 my-10 ps-10 md:text-base sm:text-xs uppercase text-gray-900 border-2 outline-none border-gray-300 rounded-lg bg-gray-50  focus:border-gray-500"
+              class="block w-full p-4 my-10 ps-8 md:ps-10 md:text-base text-[0.9rem] uppercase text-gray-900 border-2 outline-none border-gray-300 rounded-lg bg-gray-50  focus:border-gray-500"
               placeholder="Search Top 50 Coins"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -114,7 +114,7 @@ const Home = ({ data, loading }) => {
             />
             <button
               type="submit"
-              className="text-white absolute end-2.5 bottom-2.5 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+              className="text-white absolute  end-1.5 md:end-2.5 bottom-2.5 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
               Search
             </button>
           </div>
@@ -140,7 +140,7 @@ const Home = ({ data, loading }) => {
         )}
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mr-2 md:ml-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mr-1">
           {filteredCoins.map((coin) => (
             <div
               key={coin.id}
