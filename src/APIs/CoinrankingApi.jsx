@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import Home from "../pages/Home";
+import { Cryptocurrencies } from "../components";
 const API_KEY = import.meta.env.VITE_Coinranking_API_KEY;
-
 
 const CoinrankingApi = () => {
   const [data, setData] = useState([]);
@@ -46,8 +46,17 @@ const CoinrankingApi = () => {
   }, [Home]);
 
   return (
-    <div className="min-h-screen min-w-full flex justify-center">
-      {loading ? <Spinner /> : <Home data={data} loading={loading} />}
+    <div>
+      <div className="min-h-screen min-w-full flex justify-center items-center">
+        {loading ? <Spinner /> : <Home data={data} loading={loading} />}
+      </div>
+      <div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Cryptocurrencies data={data} loading={loading} />
+        )}
+      </div>
     </div>
   );
 };
