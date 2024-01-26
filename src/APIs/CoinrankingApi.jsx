@@ -50,13 +50,7 @@ const CoinrankingApi = () => {
       <div className="min-h-screen min-w-full flex justify-center items-center">
         {loading ? <Spinner /> : <Home data={data} loading={loading} />}
       </div>
-      <div>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <Cryptocurrencies data={data} loading={loading} />
-        )}
-      </div>
+      <div></div>
     </div>
   );
 };
