@@ -43,12 +43,18 @@ const CoinrankingApi = () => {
     };
 
     fetchData();
-  }, [Home]);
+  }, []);
 
   return (
     <div>
       <div className="min-h-screen min-w-full flex justify-center items-center">
-        {loading ? <Spinner /> : <Home data={data} loading={loading} />}
+        {loading ? (
+          <Spinner />
+        ) : window.location.pathname === "/cryptocurrencies" ? (
+          <Cryptocurrencies data={data} loading={loading} />
+        ) : (
+          <Home data={data} loading={loading} />
+        )}
       </div>
       <div></div>
     </div>
