@@ -8,4 +8,4 @@ export { default as Bookmarks } from "../pages/Bookmarks";
 export { default as UserAccount } from "../pages/UserAccount";
 export { default as ResetPassword } from "../pages/ResetPassword";
 export { default as CoinrankingApi } from "../APIs/CoinrankingApi";
-export {default as BingNewsApi} from "../APIs/BingNewsApi"
+export {default as BingNewsApi} from "../APIs/BingnewsApi"
