@@ -5,7 +5,7 @@ import News from "../pages/News";
 
 const BING_NEWS_API_KEY = import.meta.env.VITE_BingNews_API_KEY;
 
-const BingnewsApi = () => {
+const BingNewsApi= () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,4 +45,4 @@ const BingnewsApi = () => {
   );
 };
 
-export default BingnewsApi;
+export default BingNewsApi;
