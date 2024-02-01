@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Exchange = () => {
-  return (
-    <div>This is a Exchange Page</div>
-  )
-}
+  return <div>This is a Exchange Page</div>;
+};
 
-export default Exchange
+export default Exchange;

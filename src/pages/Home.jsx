@@ -10,13 +10,13 @@ import { BsCurrencyExchange } from "react-icons/bs";
 const Home = ({ data, loading }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCoins, setFilteredCoins] = useState(
-    data.data.coins.slice(0, 12)
+    data?.data?.coins.slice(0, 12)
   );
   const [searchError, setSearchError] = useState(false);
   const [showAllCoins, setShowAllCoins] = useState(false);
 
-  const stats = data.data.stats;
-  const coins = data.data.coins;
+  const stats = data?.data?.stats;
+  const coins = data?.data?.coins;
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -52,38 +52,38 @@ const Home = ({ data, loading }) => {
   console.log("Data in Loading:", loading);
 
   return (
-    <div className="overflow-hidden">
-      <div className="container w-screen bg-gray-200 p-6 rounded-md shadow-md lg:mr-3">
-        <h1 className="text-2xl font-sans font-bold mb-6 text-center text-gray-900 lg:hover:underline select-none">
+    <div className="overflow-hidden bg-gray-900 text-white">
+      <div className="container w-screen p-6 rounded-md shadow-md lg:mr-3">
+        <h1 className="text-2xl font-sans font-bold mb-6 text-center">
           Global Crypto Status
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="hover:bg-blue-200 transition duration-300 ease-in-out bg-white p-4 rounded-md shadow-md text-center">
-            <p className="text-sm font-semibold text-gray-600">
+          <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
+            <p className="text-sm font-semibold text-white">
               Total Cryptocurrencies <FaCoins />
             </p>
             <p className="text-3xl text-green-700 font-medium">
               {millify(stats.totalCoins)}
             </p>
           </div>
-          <div className="hover:bg-blue-200 transition duration-300 ease-in-out bg-white p-4 rounded-md shadow-md text-center">
-            <p className="text-sm font-semibold text-gray-600 ">
+          <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
+            <p className="text-sm font-semibold text-white ">
               Total Markets <GoGraph />
             </p>
             <p className="text-3xl text-green-700 font-medium">
               ${millify(stats.totalMarkets)}
             </p>
           </div>
-          <div className="hover:bg-blue-200 transition duration-300 ease-in-out bg-white p-4 rounded-md shadow-md text-center">
-            <p className="text-sm font-semibold text-gray-600 ">
+          <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
+            <p className="text-sm font-semibold text-white ">
               Total Exchanges <FaExchangeAlt />
             </p>
             <p className="text-3xl text-green-700 font-medium">
               {stats.totalExchanges}
             </p>
           </div>
-          <div className="hover:bg-blue-200 transition duration-300 ease-in-out bg-white p-4 rounded-md shadow-md text-center">
-            <p className="text-sm font-semibold text-gray-600 ">
+          <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
+            <p className="text-sm font-semibold text-white ">
               Total MarketCap <BsCurrencyExchange />
             </p>
             <p className="text-3xl text-green-700 font-medium">
@@ -93,13 +93,13 @@ const Home = ({ data, loading }) => {
         </div>
       </div>
 
-      <div className="bg-gray-200 p-6 mt-4 ">
-        <h2 className="mt-2 mb-5 font-bold text-gray-900 md:text-3xl text-2xl text-center lg:hover:underline select-none">
+      <div className="p-6 mt-4 ">
+        <h2 className="mt-2 mb-5 font-bold text-center md:text-3xl text-2xl">
           <span className="hidden sm:block">
             {" "}
             Top 12 Cryptocurrencies In The World
           </span>
-          <span className=" sm:hidden block text-[1.7rem] py-2 text-center bg-gray-900 text-green-100 p-[0.40rem] rounded-md font-serif">
+          <span className="sm:hidden block text-[1.7rem] py-2 text-center bg-gray-900 text-green-100 p-[0.40rem] rounded-md font-serif">
             Top 12 Cryptocurrencies
           </span>
         </h2>
@@ -112,7 +112,7 @@ const Home = ({ data, loading }) => {
             <input
               type="search"
               id="default-search"
-              className="block w-full p-4 my-10 ps-8 md:ps-10 md:text-base text-[0.9rem] uppercase text-gray-900 border-2 outline-none border-gray-300 rounded-lg bg-gray-50  focus:border-gray-500"
+              className="block w-full p-4 my-10 ps-8 md:ps-10 md:text-base text-[0.9rem] uppercase border-2 outline-none rounded-lg bg-gray-800 border-gray-500"
               placeholder="Search Top 50 Coins"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -120,7 +120,7 @@ const Home = ({ data, loading }) => {
             />
             <button
               type="submit"
-              className="text-white absolute  end-1.5 md:end-2.5 bottom-2.5 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+              className="text-white absolute end-1.5 md:end-2.5 bottom-2.5 bg-gray-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
             >
               Search
             </button>
@@ -131,7 +131,7 @@ const Home = ({ data, loading }) => {
           <div className="w-full text-center md:text-right -mt-6 p-1">
             <button
               onClick={handleShowAllCoins}
-              className="text-white bottom-2.5 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+              className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-4 py-2"
             >
               Show All Coins
             </button>
@@ -140,7 +140,7 @@ const Home = ({ data, loading }) => {
 
         {searchError && (
           <div className="mt-4 p-3 text-center bg-red-100 border border-red-400 rounded-md ml-4 mr-4">
-            <p className="text-red-500 md:text-2xl font-mono ">
+            <p className="text-red-500 md:text-2xl font-mono">
               No matching coins Found
             </p>
           </div>
@@ -150,7 +150,7 @@ const Home = ({ data, loading }) => {
           {filteredCoins.map((coin, index) => (
             <div
               key={index}
-              className="w-64 h-[17rem] rounded overflow-hidden shadow-lg hover:shadow-2xl bg-white transition-transform duration-300 ease-in-out transform hover:scale-105 flex flex-col mx-auto my-4"
+              className="w-64 h-[17rem] rounded overflow-hidden shadow-lg hover:shadow-2xl bg-gray-800 transition-transform duration-300 ease-in-out transform hover:scale-105 flex flex-col mx-auto my-4"
             >
               <div className="mt-1 mx-auto">
                 <img
@@ -160,30 +160,30 @@ const Home = ({ data, loading }) => {
                 />
               </div>
               <div className="mt-3 px-6 pr-4 leading-loose flex-1">
-                <p className="font-semibold text-2xl mb-2 text-gray-900">
+                <p className="font-semibold text-2xl mb-2 text-white">
                   {coin.name}
                 </p>
-                <p className="text-gray-700 text-base font-bold">
+                <p className="text-whitetext-base font-bold">
                   Price:
-                  <span className="text-gray-600 text-base">
+                  <span className="text-white text-base">
                     {" "}
                     ${millify(coin.price)}
                   </span>
                 </p>
-                <p className="text-gray-700 text-base font-bold">
+                <p className="text-white00 text-base font-bold">
                   Rank:
-                  <span className="text-gray-600 text-base"> {coin.rank}</span>
+                  <span className="text-white text-base"> {coin.rank}</span>
                 </p>
-                <p className="text-gray-700 text-base font-bold">
+                <p className="text-white text-base font-bold">
                   Market Cap:
-                  <span className="text-gray-600 text-base">
+                  <span className="text-white text-base">
                     {" "}
                     ${millify(coin.marketCap)}
                   </span>
                 </p>
-                <p className="text-gray-700 font-bold text-base">
+                <p className="text-white font-bold text-base">
                   Daily Changes:
-                  <span className="text-gray-600 text-base">
+                  <span className="text-white text-base">
                     {" "}
                     {millify(coin.change)}%
                   </span>

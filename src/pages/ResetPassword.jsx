@@ -12,12 +12,14 @@ const ResetPassword = () => {
               </h1>
               <form
                 className="space-y-4 md:space-y-6"
-                onSubmit={() => navigate("/")}>
+                onSubmit={() => navigate("/")}
+              >
                 <div className="mt-5">
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white ">
-                   Enter your email 
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-white "
+                  >
+                    Enter your email
                   </label>
                   <input
                     type="email"
@@ -31,7 +33,8 @@ const ResetPassword = () => {
 
                 <button
                   type="submit"
-                  className="w-full text-white bg-blue-600 hover:bg-blue-700  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                  className="w-full text-white bg-blue-600 hover:bg-blue-700  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
                   Submit
                 </button>
               </form>
