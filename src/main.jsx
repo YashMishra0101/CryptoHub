@@ -26,10 +26,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<CoinrankingApi />} />
+      <Route index element={<CoinrankingApi/>} />
       <Route path="cryptocurrencies" element={<CoinrankingApi />} />
       <Route path="exchange" element={<Exchange />} />
       <Route path="news" element={<BingNewsApi/>} />

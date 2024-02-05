@@ -81,7 +81,7 @@ const Cryptocurrencies = ({ data, loading }) => {
         <span className="w-full block md:inline-block text-center md:text-right -mt-6 mb-3">
           <button
             onClick={handleShowAllCoins}
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+            className="text-white bg-gray-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
           >
             Show All Coins
           </button>
@@ -113,11 +113,11 @@ const Cryptocurrencies = ({ data, loading }) => {
         {filteredCoins.map((coin, index) => (
           <div
             key={index}
-            className="w-64 h-[17rem] rounded overflow-hidden shadow-lg hover:shadow-2xl bg-gray-800 transition-transform duration-300 ease-in-out transform hover:scale-105 flex flex-col mx-auto my-4"
+            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col"
           >
-            <div className="mt-1 mx-auto">
+            <div className="mt-1 mb-2 mx-auto">
               <img
-                className="object-cover border-2 border-gray-900 rounded-full w-20 h-20"
+                className="object-cover border-2 border-gray-800 rounded-full w-20 h-20"
                 src={coin.iconUrl}
                 alt="coin-logo"
               />
@@ -126,7 +126,7 @@ const Cryptocurrencies = ({ data, loading }) => {
               <p className="font-semibold text-2xl mb-2">{coin.name}</p>
               <p className="text-white text-base font-bold">
                 Price:{" "}
-                <span className="text-white text-base">
+                <span className="text-white text-base leading-6">
                   ${millify(coin.price)}
                 </span>
               </p>
@@ -135,13 +135,13 @@ const Cryptocurrencies = ({ data, loading }) => {
               </p>
               <p className="text-gray-300 text-base font-bold">
                 Market Cap:{" "}
-                <span className="text-white text-base">
+                <span className="text-white text-base leading-6">
                   ${millify(coin.marketCap)}
                 </span>
               </p>
               <p className="text-gray-300 font-bold text-base">
                 Daily Changes:{" "}
-                <span className="text-white text-base">
+                <span className="text-white text-base leading-6">
                   {millify(coin.change)}%
                 </span>
               </p>
