@@ -8,7 +8,7 @@ import { store } from "./redux/store.jsx";
 import {
   Home,
   Cryptocurrencies,
-  Exchange,
+  Chart,
   News,
   Login,
   SignUp,
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index element={<CoinrankingApi/>} />
       <Route path="cryptocurrencies" element={<CoinrankingApi />} />
-      <Route path="exchange" element={<Exchange />} />
+      <Route path="chart" element={<CoinrankingApi/>} />
       <Route path="news" element={<BingNewsApi/>} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />

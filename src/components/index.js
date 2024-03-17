@@ -1,6 +1,6 @@
 export { default as Home } from "../pages/Home";
 export { default as Cryptocurrencies } from "../pages/Cryptocurrencies";
-export { default as Exchange } from "../pages/Exchange";
+export { default as Chart } from "../pages/Chart";
 export { default as News } from "../pages/News";
 export { default as Login } from "../pages/Login";
 export { default as SignUp } from "../pages/SignUp";

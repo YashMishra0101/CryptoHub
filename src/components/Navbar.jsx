@@ -43,9 +43,9 @@ const NavBar = () => {
             </NavLink>
             <NavLink
               className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-              to="exchange"
+              to="chart"
             >
-              Exchange
+              Chart
             </NavLink>
             <NavLink
               className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
