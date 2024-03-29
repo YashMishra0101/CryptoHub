@@ -12,8 +12,8 @@ const Login = () => {
 
   return (
     <div>
-      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-        <div className="flex flex-col items-center justify-center px-6 py-7 mx-auto md:h-screen lg:py-0">
+      <div className="bg-gray-50 dark:bg-gray-900 h-[40rem] overflow-hidden">
+        <div className="flex flex-col items-center justify-center px-6 py-7 mx-auto md:h-screen lg:py-0 relative top-16">
           <div className="w-full  rounded-lg shadow dborder md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 mb-14 mt-10 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="md:text-center font-bold text-2xl text-white">

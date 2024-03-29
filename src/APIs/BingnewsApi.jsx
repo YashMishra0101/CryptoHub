@@ -39,7 +39,7 @@ const BingnewsApi = () => {
 
   return (
     <div>
-      <div className="min-h-screen min-w-full flex justify-center items-center">
+      <div className="min-h-screen min-w-full flex justify-center items-center pt-8">
         {loading ? (
           <Spinner />
         ) : window.location.pathname === "/news" ? (

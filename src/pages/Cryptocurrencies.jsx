@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import millify from "millify";
-import { useState } from "react";
-import { FaSearchDollar } from "react-icons/fa";
+import { FaSearchDollar, FaBookmark } from "react-icons/fa"; // Added FaBookmark icon
 
 const Cryptocurrencies = ({ data, loading }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,12 +43,12 @@ const Cryptocurrencies = ({ data, loading }) => {
   console.log("Data in Loading:", loading);
 
   return (
-    <div className="w-screen overflow-hidden bg-gray-900 p-6 text-white">
+    <div className="w-screen overflow-hidden bg-gray-900 p-6 text-white pt-[6rem]">
       <h2 className="text-3xl font-bold text-center mb-8 hover:text-green-200 select-none">
         <span className="hidden sm:block">
           Explore the Top 50 Cryptocurrencies
         </span>
-        <span className=" sm:hidden block text-[1.7rem] py-2 text-center bg-gray-800 text-green-100 p-[0.40rem] rounded-md font-serif">
+        <span className="sm:hidden block text-[1.7rem] py-2 text-center bg-gray-800 text-green-100 p-[0.40rem] rounded-md font-serif">
           Top 50 Cryptocurrencies
         </span>
       </h2>
@@ -88,8 +87,6 @@ const Cryptocurrencies = ({ data, loading }) => {
         </span>
       )}
 
-      {/* Conditional rendering based on search error */}
-
       {searchError && (
         <div className="md:w-[35rem] md:h-[15rem] h-[16m] text-center block mx-auto relative md:bottom-[2rem] mb-56">
           <div className="md:w-[30rem] text-center bg-red-500 border border-red-700 rounded-md mx-auto">
@@ -108,13 +105,15 @@ const Cryptocurrencies = ({ data, loading }) => {
         </div>
       )}
 
-      {/* Grid of filtered coins */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4">
         {filteredCoins.map((coin, index) => (
           <div
             key={index}
-            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col"
+            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative" // Added relative class for positioning the bookmark button
           >
+            <div className="absolute top-2 right-2"> {/* Added absolute positioning for the bookmark button */}
+              <FaBookmark className="text-gray-400 hover:text-yellow-400 cursor-pointer" /> {/* Added bookmark button */}
+            </div>
             <div className="mt-1 mb-2 mx-auto">
               <img
                 className="object-cover border-2 border-gray-800 rounded-full w-20 h-20"

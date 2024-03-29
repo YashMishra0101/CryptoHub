@@ -54,7 +54,7 @@ const Home = ({ data, newsData }) => {
 
   return (
     <div className="overflow-hidden bg-gray-900 text-white">
-      <div className="container w-screen p-6 rounded-md shadow-md lg:mr-3">
+      <div className="container w-screen p-6 rounded-md shadow-md lg:mr-3 mt-16">
         <h1 className="text-2xl font-sans font-bold mb-6 text-center">
           Global Crypto Status
         </h1>
