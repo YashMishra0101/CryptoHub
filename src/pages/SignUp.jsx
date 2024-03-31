@@ -1,27 +1,65 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase/FirebaseConfig"; // Assuming you have db reference in FirebaseConfig
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleCheckboxChange = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (password === confirmPassword) {
+      try {
+        // Create user with email and password
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Get the user's unique ID
+        const userUID = userCredential.user.uid;
+
+        // Extract the user's unique ID based on email
+        const uniqueID = email.split("@")[0]; // Using email prefix as the unique ID
+
+        // Store user information in Firestore (db)
+        await db.collection("users").doc(userUID).set({
+          name: name,
+          email: email,
+          uniqueID: uniqueID,
+        });
+
+        toast.success("Signup Successful");
+        navigate("/login");
+      } catch (error) {
+        toast.error("Error: " + error.message); // Display error message
+        console.error(`Signup failed: ${error.message}`);
+      }
+    } else {
+      toast.error("Password not matched");
+    }
+  };
+
   return (
     <div className="bg-gray-900 h-[47rem]">
       <div className="flex flex-col items-center justify-center px-6 py-5 md:py-8 mx-auto md:h-screen lg:py-0 relative top-[6rem]">
-        <div className="w-full  rounded-lg shadow  md:mt-5 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 ">
+        <div className="w-full rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 ">
           <div className="pr-4 pl-4 space-y-4 pt-5 pb-3">
-            <h1 className="text-center font-bold  text-2xl text-white pt-2">
+            <h1 className="text-center font-bold text-2xl text-white pt-2">
               Create account
             </h1>
-            <form
-              className="space-y-4 md:space-y-6"
-              onSubmit={() => navigate("/login")}
-            >
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
               <div>
                 <label
                   htmlFor="name"
@@ -36,6 +74,8 @@ const SignUp = () => {
                   autoComplete="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
               </div>
@@ -53,6 +93,8 @@ const SignUp = () => {
                   autoComplete="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -69,7 +111,9 @@ const SignUp = () => {
                   id="password"
                   autoComplete="new-password"
                   placeholder="••••••••"
-                  className="  border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className="border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
@@ -87,6 +131,8 @@ const SignUp = () => {
                   autoComplete="new-password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
               </div>
@@ -115,9 +161,9 @@ const SignUp = () => {
                 Create an account
               </button>
               <p className="text-base font-light text-gray-500 dark:text-gray-400 cursor-pointer">
-                Already have an account? {""}
+                Already have an account?{" "}
                 <span
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500 "
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   onClick={() => navigate("/login")}
                 >
                   Login here

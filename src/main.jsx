@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.jsx";
+import toast, { Toaster } from "react-hot-toast";
+
 
 import {
   Home,
@@ -39,6 +41,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<SignUp />} />
       <Route path="resetPassword" element={<ResetPassword />} />
       <Route path="chatgpt" element={< Chatgpt />} />
+      <Route path="bookmarks" element={< Bookmarks />} />
     </Route>
   )
 );
@@ -46,5 +49,6 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <RouterProvider router={router} />
+    <Toaster position="top-center" />
   </Provider>
 );

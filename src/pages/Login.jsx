@@ -1,13 +1,32 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/FirebaseConfig";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const [showpassword, setShowPassword] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
   const navigate = useNavigate();
 
   const handleCheckboxChange = () => {
-    setShowPassword(!showpassword);
+    setShowPassword(!showPassword);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      localStorage.setItem("isLoggedIn", "true"); // Save login status in local storage
+      toast.success("Login Successful");
+      setIsLoggedIn(true); // Update login status state
+      navigate("/");
+    } catch (error) {
+      toast.error("Invalid email or password");
+      console.log(`Login failed: ${error.message}`);
+    }
   };
 
   return (
@@ -19,10 +38,7 @@ const Login = () => {
               <h1 className="md:text-center font-bold text-2xl text-white">
                 Log in to your account
               </h1>
-              <form
-                className="space-y-4 md:space-y-6"
-                onSubmit={() => navigate("/")}
-              >
+              <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                 <div>
                   <label
                     htmlFor="email"
@@ -37,6 +53,8 @@ const Login = () => {
                     autoComplete="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@gmail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -48,12 +66,14 @@ const Login = () => {
                     Password
                   </label>
                   <input
-                    type={showpassword ? "text" : "password"}
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
                     autoComplete="current-password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>

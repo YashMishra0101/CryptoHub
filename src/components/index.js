@@ -11,3 +11,5 @@ export { default as CoinrankingApi } from "../APIs/CoinrankingApi";
 export {default as BingNewsApi} from "../APIs/BingnewsApi";
 export {default as Chatgpt}from "../pages/Chatgpt"
 
+
+
