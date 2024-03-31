@@ -1,54 +1,72 @@
-import React, { useState } from 'react';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useState } from "react";
+import Markdown from "react-markdown";
 
-const ChatGPT = () => {
-  const [chatHistory, setChatHistory] = useState([]);
-  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const Chatgpt = () => {
+	const [chatHistory, setChatHistory] = useState([]);
 
-  const openai = new OpenAI({
-    apiKey,
-    dangerouslyAllowBrowser: true, // Enable browser-like environment
-  });
+	const genAI = new GoogleGenerativeAI();
+	// "" add api key here
 
-  const sendMessage = async (message) => {
-    try {
-      const response = await openai.chat.completions.create({
-        messages: [{ role: 'user', content: message }],
-        model: 'gpt-3.5-turbo',
-      });
-      const botMessage = response.data.choices[0].message.content;
-      setChatHistory([...chatHistory, { role: 'bot', content: botMessage }]);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+	const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-  return (
-    <div className="flex flex-col h-screen justify-between">
-      <div className="flex-grow p-4">
-        {chatHistory.map((message, index) => (
-          <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <div className={`inline-block px-4 py-2 rounded-lg ${message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}>
-              {message.content}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="p-4">
-        <input
-          type="text"
-          placeholder="Type your message..."
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              sendMessage(e.target.value);
-              e.target.value = '';
-            }
-          }}
-        />
-      </div>
-    </div>
-  );
+	async function run(message) {
+		setChatHistory((prevChatHistory) => [
+			...prevChatHistory,
+			{ role: "user", content: message },
+		]);
+
+		const prompt = message;
+		const result = await model.generateContent(prompt);
+		const response = await result.response;
+		const text = response.text();
+		if (response?.text) {
+			setChatHistory((prevChatHistory) => [
+				...prevChatHistory,
+				{ role: "bot", content: text },
+			]);
+		} else {
+			console.log("API NOT WORKING");
+		}
+	}
+
+	return (
+		<div>
+			<div className="flex flex-col h-screen justify-between pt-32">
+				<div className="flex-grow p-4">
+					{chatHistory &&
+						chatHistory?.map((message, index) => (
+							<div
+								key={index}
+								className={`mb-4 ${
+									message.role === "user" ? "text-right" : "text-left"
+								}`}>
+								<div
+									className={`inline-block px-4 py-2 rounded-lg ${
+										message.role === "user"
+											? "bg-blue-500 text-white"
+											: "bg-gray-300"
+									}`}>
+									<Markdown>{message?.content}</Markdown>
+								</div>
+							</div>
+						))}
+				</div>
+				<div className="p-4 ">
+					<input
+						type="text"
+						placeholder="Type you query..."
+						className="w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none"
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								run(e.target.value);
+							}
+						}}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 };
 
-export default ChatGPT;
+export default Chatgpt;
