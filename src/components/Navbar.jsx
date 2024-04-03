@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FiMenu } from "react-icons/fi";
+import { auth } from "../firebase/FirebaseConfig";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,10 +10,14 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedInStatus = localStorage.getItem("isLoggedIn");
-    if (loggedInStatus === "true") {
-      setIsLoggedIn(true);
-    }
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   const toggleMenu = () => {
@@ -24,13 +29,18 @@ const NavBar = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    navigate("/login");
+    auth.signOut()
+      .then(() => {
+        setIsLoggedIn(false);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error.message);
+      });
   };
 
   return (
-    <nav className="border-gray-200 bg-gray-900 select-none fixed w-full z-30">
+    <nav className="border-gray-200 bg-gray-900 select-none w-full z-30">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <span className="flex items-center space-x-3">
           <NavLink to="/">
@@ -61,7 +71,7 @@ const NavBar = () => {
           >
             News
           </NavLink>
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <NavLink
                 className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
@@ -77,7 +87,8 @@ const NavBar = () => {
                 Bookmark
               </NavLink>
             </>
-          ) : (
+          )}
+          {!isLoggedIn && (
             <>
               <NavLink
                 className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
@@ -90,6 +101,12 @@ const NavBar = () => {
                 to="/signup"
               >
                 Sign Up
+              </NavLink>
+              <NavLink
+                className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+                to="/aibot"
+              >
+                AI-Help
               </NavLink>
             </>
           )}
@@ -135,7 +152,7 @@ const NavBar = () => {
           >
             News
           </NavLink>
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <NavLink
                 className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
@@ -155,7 +172,8 @@ const NavBar = () => {
                 Logout
               </NavLink>
             </>
-          ) : (
+          )}
+          {!isLoggedIn && (
             <>
               <NavLink
                 className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"

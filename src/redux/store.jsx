@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cryptoSliceReducer from "./slice/cryptoSlice";
+import { cryptoSlice } from "./slice/cryptoSlice"; // Correct import
+
 export const store = configureStore({
-  reducer: cryptoSliceReducer,
+  reducer: cryptoSlice.reducer, // Access the reducer from cryptoSlice
 });

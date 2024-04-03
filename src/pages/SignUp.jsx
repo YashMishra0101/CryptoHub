@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase/FirebaseConfig"; // Assuming you have db reference in FirebaseConfig
+import { auth, fireDb } from "../firebase/FirebaseConfig";
+import { collection, doc, setDoc } from "firebase/firestore"; // Import firestore functions for writing data
+
 import toast from "react-hot-toast";
 
 const SignUp = () => {
@@ -33,8 +35,8 @@ const SignUp = () => {
         // Extract the user's unique ID based on email
         const uniqueID = email.split("@")[0]; // Using email prefix as the unique ID
 
-        // Store user information in Firestore (db)
-        await db.collection("users").doc(userUID).set({
+        // Store user information in Firebase Authentication
+        await setDoc(doc(fireDb, "users", userUID), { // Storing user data in Firestore
           name: name,
           email: email,
           uniqueID: uniqueID,
@@ -43,7 +45,7 @@ const SignUp = () => {
         toast.success("Signup Successful");
         navigate("/login");
       } catch (error) {
-        toast.error("Error: " + error.message); // Display error message
+        toast.error("Enter Valid Detail");
         console.error(`Signup failed: ${error.message}`);
       }
     } else {
@@ -51,9 +53,10 @@ const SignUp = () => {
     }
   };
 
+
   return (
-    <div className="bg-gray-900 h-[47rem]">
-      <div className="flex flex-col items-center justify-center px-6 py-5 md:py-8 mx-auto md:h-screen lg:py-0 relative top-[6rem]">
+    <div className="bg-gray-900 min-h-[43rem]">
+      <div className="flex flex-col items-center justify-center px-6 py-5 md:py-8 mx-auto md:h-screen lg:py-0 relative top-12 ">
         <div className="w-full rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 ">
           <div className="pr-4 pl-4 space-y-4 pt-5 pb-3">
             <h1 className="text-center font-bold text-2xl text-white pt-2">
@@ -111,7 +114,7 @@ const SignUp = () => {
                   id="password"
                   autoComplete="new-password"
                   placeholder="••••••••"
-                  className="border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className="  border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

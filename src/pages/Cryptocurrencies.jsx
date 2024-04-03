@@ -1,49 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import millify from "millify";
-import { FaSearchDollar, FaBookmark } from "react-icons/fa"; // Added FaBookmark icon
+import { FaSearchDollar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBookmark } from "../redux/slice/cryptoSlice";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, fireDb } from "../firebase/FirebaseConfig";
+import toast from "react-hot-toast";
 
 const Cryptocurrencies = ({ data, loading }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCoins, setFilteredCoins] = useState(data.data.coins);
   const [searchError, setSearchError] = useState(false);
   const [showAllCoins, setShowAllCoins] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const dispatch = useDispatch();
+  const bookmarks = useSelector((state) => state);
 
-  const coins = data.data.coins;
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserId(user.uid);
+      } else {
+        setUserId(null);
+      }
+    });
+  
+    const fetchBookmarks = async () => {
+      if (userId) {
+        const q = query(
+          collection(fireDb, "bookmarks"),
+          where("userId", "==", userId)
+        );
+        const querySnapshot = await getDocs(q);
+        const bookmarksData = [];
+        querySnapshot.forEach((doc) => {
+          bookmarksData.push({ id: doc.id, ...doc.data() }); // Include document ID
+        });
+        dispatch({ type: "SET_BOOKMARKS", payload: bookmarksData });
+      }
+    };
+  
+    fetchBookmarks(); // Fetch bookmarks when the component mounts or refreshes
+  
+    return () => unsubscribe();
+  }, [userId, dispatch]);
+  
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
 
-    // Filter coins based on the search query
     const filtered = coins.filter((coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Update the state with the filtered coins
     setFilteredCoins(filtered);
-
-    // Update search error state
     setSearchError(filtered.length === 0);
-
-    // Show the "Show All Coins" button
     setShowAllCoins(true);
   };
 
   const handleShowAllCoins = () => {
-    // Show all coins
     setFilteredCoins(coins);
-    // Hide the "Show All Coins" button
     setShowAllCoins(false);
-    // Clear the search error
     setSearchError(false);
-
     setSearchQuery("");
   };
 
-  console.log("Data in Home:", data);
-  console.log("Data in Loading:", loading);
+  const handleBookmark = async (coin) => {
+    try {
+      if (!userId) {
+        throw new Error("User not logged in");
+      }
+  
+      if (!coin || !coin.name || !coin.price) {
+        throw new Error("Invalid coin data");
+      }
+  
+      const isAlreadyBookmarked = bookmarks.some(
+        (item) => item.name === coin.name
+      );
+      if (isAlreadyBookmarked) {
+        toast.info("This coin is already bookmarked.");
+        return;
+      }
+  
+      const bookmarksRef = collection(fireDb, "bookmarks");
+      await addDoc(bookmarksRef, {
+        userId: userId,
+        coinId: coin.uuid,
+        name: coin.name,
+        price: coin.price,
+        createdAt: serverTimestamp(),
+      });
+      dispatch(addToBookmark(coin));
+      toast.success("Bookmark saved successfully");
+    } catch (error) {
+      console.error("Error saving bookmark:", error);
+      toast.error("Failed to save bookmark. Please try again later.");
+    }
+  };
+  
+  
 
   return (
-    <div className="w-screen overflow-hidden bg-gray-900 p-6 text-white pt-[6rem]">
+    <div className="w-screen overflow-hidden bg-gray-900 p-6 text-white ">
       <h2 className="text-3xl font-bold text-center mb-8 hover:text-green-200 select-none">
         <span className="hidden sm:block">
           Explore the Top 50 Cryptocurrencies
@@ -109,10 +175,10 @@ const Cryptocurrencies = ({ data, loading }) => {
         {filteredCoins.map((coin, index) => (
           <div
             key={index}
-            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative" // Added relative class for positioning the bookmark button
+            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative"
           >
-            <div className="absolute top-2 right-2"> {/* Added absolute positioning for the bookmark button */}
-              <FaBookmark className="text-gray-400 hover:text-yellow-400 cursor-pointer" /> {/* Added bookmark button */}
+            <div className="absolute top-2 right-2 flex items-center">
+              <span className="text-xs text-blue-400 ml-1">Not Bookmarked</span>
             </div>
             <div className="mt-1 mb-2 mx-auto">
               <img
@@ -143,6 +209,10 @@ const Cryptocurrencies = ({ data, loading }) => {
                 <span className="text-white text-base leading-6">
                   {millify(coin.change)}%
                 </span>
+              </p>
+              {/* Displaying the UUID */}
+              <p className="text-gray-300 font-bold text-base mt-2">
+                UUID: {coin.uuid}
               </p>
             </div>
           </div>

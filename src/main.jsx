@@ -19,7 +19,7 @@ import {
   ResetPassword,
   CoinrankingApi,
   BingNewsApi,
-  Chatgpt
+  AIBot
 } from "./components/index.js";
 
 import {
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="resetPassword" element={<ResetPassword />} />
-      <Route path="chatgpt" element={< Chatgpt />} />
+      <Route path="aibot" element={< AIBot />} />
       <Route path="bookmarks" element={< Bookmarks />} />
     </Route>
   )
