@@ -1,17 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import millify from "millify";
-import { FaSearchDollar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { addToBookmark } from "../redux/slice/cryptoSlice";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
-import { auth, fireDb } from "../firebase/FirebaseConfig";
+import { FaSearchDollar, FaBookmark } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Cryptocurrencies = ({ data, loading }) => {
@@ -19,44 +8,11 @@ const Cryptocurrencies = ({ data, loading }) => {
   const [filteredCoins, setFilteredCoins] = useState(data.data.coins);
   const [searchError, setSearchError] = useState(false);
   const [showAllCoins, setShowAllCoins] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const dispatch = useDispatch();
-  const bookmarks = useSelector((state) => state);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        setUserId(null);
-      }
-    });
-  
-    const fetchBookmarks = async () => {
-      if (userId) {
-        const q = query(
-          collection(fireDb, "bookmarks"),
-          where("userId", "==", userId)
-        );
-        const querySnapshot = await getDocs(q);
-        const bookmarksData = [];
-        querySnapshot.forEach((doc) => {
-          bookmarksData.push({ id: doc.id, ...doc.data() }); // Include document ID
-        });
-        dispatch({ type: "SET_BOOKMARKS", payload: bookmarksData });
-      }
-    };
-  
-    fetchBookmarks(); // Fetch bookmarks when the component mounts or refreshes
-  
-    return () => unsubscribe();
-  }, [userId, dispatch]);
-  
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
 
-    const filtered = coins.filter((coin) =>
+    const filtered = filteredCoins.filter((coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -66,47 +22,29 @@ const Cryptocurrencies = ({ data, loading }) => {
   };
 
   const handleShowAllCoins = () => {
-    setFilteredCoins(coins);
+    setFilteredCoins(data.data.coins);
     setShowAllCoins(false);
     setSearchError(false);
     setSearchQuery("");
   };
 
-  const handleBookmark = async (coin) => {
-    try {
-      if (!userId) {
-        throw new Error("User not logged in");
-      }
-  
-      if (!coin || !coin.name || !coin.price) {
-        throw new Error("Invalid coin data");
-      }
-  
-      const isAlreadyBookmarked = bookmarks.some(
-        (item) => item.name === coin.name
-      );
-      if (isAlreadyBookmarked) {
-        toast.info("This coin is already bookmarked.");
-        return;
-      }
-  
-      const bookmarksRef = collection(fireDb, "bookmarks");
-      await addDoc(bookmarksRef, {
-        userId: userId,
-        coinId: coin.uuid,
-        name: coin.name,
-        price: coin.price,
-        createdAt: serverTimestamp(),
-      });
-      dispatch(addToBookmark(coin));
-      toast.success("Bookmark saved successfully");
-    } catch (error) {
-      console.error("Error saving bookmark:", error);
-      toast.error("Failed to save bookmark. Please try again later.");
+  const handleBookmark = (coin) => {
+    if (coin.bookmarked) {
+      toast.success(`${coin.name} removed from bookmarks.`);
+    } else {
+      toast.success(`${coin.name} added to bookmarks.`);
     }
+
+    // Here, you should add code to store bookmarked data in Firebase database
+    // with respect to the particular logged-in user's account
+    // You can use Firebase Authentication to get the user's information
+
+    const updatedCoins = filteredCoins.map((c) =>
+      c.uuid === coin.uuid ? { ...c, bookmarked: !c.bookmarked } : c
+    );
+
+    setFilteredCoins(updatedCoins);
   };
-  
-  
 
   return (
     <div className="w-screen overflow-hidden bg-gray-900 p-6 text-white ">
@@ -178,7 +116,14 @@ const Cryptocurrencies = ({ data, loading }) => {
             className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative"
           >
             <div className="absolute top-2 right-2 flex items-center">
-              <span className="text-xs text-blue-400 ml-1">Not Bookmarked</span>
+              <FaBookmark
+                onClick={() => handleBookmark(coin)}
+                className={`text-gray-400 cursor-pointer ${
+                  coin.bookmarked
+                    ? "text-green-400 hover:text-green-500"
+                    : "text-blue-400 hover:text-blue-500"
+                }`}
+              />
             </div>
             <div className="mt-1 mb-2 mx-auto">
               <img
@@ -223,3 +168,4 @@ const Cryptocurrencies = ({ data, loading }) => {
 };
 
 export default Cryptocurrencies;
+
