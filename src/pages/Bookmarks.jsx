@@ -60,11 +60,11 @@ const Bookmarks = () => {
 	};
 
 	return (
-		<div className="w-screen overflow-hidden bg-gray-900 p-6 text-white">
+		<div className=" h-screen overflow-hidden bg-gray-900 p-6 text-white">
 			<h2 className="text-3xl font-bold text-center mb-8 hover:text-green-200 select-none">
 				Bookmarked Cryptocurrencies
 			</h2>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
 				{bookmarkedCoins.map((coin, index) => (
 					<div
 						key={index}
@@ -72,7 +72,7 @@ const Bookmarks = () => {
 						<div className="absolute top-2 right-2 flex items-center">
 							<MdDeleteOutline
 								onClick={() => handleDeleteBookmark(coin)}
-								className="text-2xl cursor-pointer"
+								className="text-2xl cursor-pointer hover:text-red-600"
 							/>
 						</div>
 						<div className="mt-1 mb-2 mx-auto">

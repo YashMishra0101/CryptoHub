@@ -24,7 +24,6 @@ const Home = ({ data, newsData }) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-
     // Filter coins based on the search query
     const filtered = coins.filter((coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -117,7 +116,6 @@ const Home = ({ data, newsData }) => {
               placeholder="Search Top 50 Coins"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              required
             />
             <button
               type="submit"
@@ -147,7 +145,7 @@ const Home = ({ data, newsData }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mr-1 cursor-pointer">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mr-1 cursor-pointer">
           {filteredCoins?.map((coin, index) => (
             <div
               key={index}

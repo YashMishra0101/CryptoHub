@@ -35,9 +35,12 @@ const AIBot = () => {
   };
 
   return (
-    <div className="min-h-[40.5rem] flex flex-col justify-between">
-      <h1 className="text-2xl font-semibold text-center rounded-md bg-blue-400 font-mono mt-2">AI Help 🤖</h1>
+    <div className="min-h-[39rem]  flex flex-col justify-between">
+      <h1 className="text-3xl text-white font-sans font-bold mb-6 text-center">
+          AI Chat Assistance
+        </h1>
       <div className="flex-grow p-4 overflow-y-auto">
+        
         {chatHistory.map((message, index) => (
           <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
             <div className={`inline-block px-4 py-2 rounded-lg ${message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-300"}`}>
@@ -50,7 +53,7 @@ const AIBot = () => {
         <input
           type="text"
           placeholder="Type your query..."
-          className="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none"
+          className="flex-grow px-4 py-2 4 rounded-lg border border-gray-300 focus:outline-none"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => {
@@ -60,7 +63,7 @@ const AIBot = () => {
           }}
         />
         <button
-          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none"
+          className="ml-2 px-4 py-2 bg-blue-500 4 text-white rounded-lg focus:outline-none"
           onClick={sendMessage}
         >
           Send

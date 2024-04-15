@@ -5,3 +5,14 @@
 .active {
   color: #4299e1;
 }
+::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));/* Set the background color of the track */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(125, 112, 153, 0.265); 
+  border-radius: 10px;
+}

@@ -72,23 +72,6 @@ const NavBar = () => {
           >
             News
           </NavLink>
-          {isLoggedIn && (
-            <>
-              <NavLink
-                className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-                to="/"
-                onClick={logout}
-              >
-                Logout
-              </NavLink>
-              <NavLink
-                className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-                to="bookmarks"
-              >
-                Bookmark
-              </NavLink>
-            </>
-          )}
           {!isLoggedIn && (
             <>
               <NavLink
@@ -108,9 +91,26 @@ const NavBar = () => {
           <NavLink
             className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
             to="/aibot"
-          >
+            >
             AI-Help
           </NavLink>
+        {isLoggedIn && (
+          <>
+            <NavLink
+              className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+              to="bookmarks"
+            >
+              Bookmark
+            </NavLink>
+            <NavLink
+              className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+              to="/"
+              onClick={logout}
+            >
+              Logout
+            </NavLink>
+          </>
+        )}
         </div>
         <button
           type="button"
