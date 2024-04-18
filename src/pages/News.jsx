@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const News = ({ data, loading }) => {
+  const navigate = useNavigate();
   const [showFullDescription, setShowFullDescription] = useState(
     Array(data?.data?.length || 0).fill(false)
   );
@@ -43,8 +45,8 @@ const News = ({ data, loading }) => {
                 Sorry, News page is not working
               </p>
               <a
-                href="/"
-                className="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                onClick={() => navigate("/")}
+                className="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
               >
                 Back to Homepage
               </a>

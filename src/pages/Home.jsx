@@ -6,6 +6,7 @@ import { FaCoins } from "react-icons/fa";
 import { FaExchangeAlt } from "react-icons/fa";
 import { BsCurrencyExchange } from "react-icons/bs";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = ({ data, newsData }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,6 +15,7 @@ const Home = ({ data, newsData }) => {
   );
   const [searchError, setSearchError] = useState(false);
   const [showAllCoins, setShowAllCoins] = useState(false);
+  const navigate = useNavigate();
 
   const stats = data?.data?.stats;
   const coins = data?.data?.coins;
@@ -64,8 +66,8 @@ const Home = ({ data, newsData }) => {
                 Sorry, Home page is not working
               </p>
               <a
-                href="/aboutus"
-                className="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4"
+                onClick={() => navigate("/aboutus")}
+                className="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-4 cursor-pointer"
               >
                 Visit About Page
               </a>

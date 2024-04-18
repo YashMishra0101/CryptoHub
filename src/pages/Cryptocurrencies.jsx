@@ -3,6 +3,7 @@ import millify from "millify";
 import { FaSearchDollar, FaBookmark } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 import {
   addDoc,
   arrayUnion,
@@ -24,6 +25,7 @@ const Cryptocurrencies = ({ data, loading }) => {
   const [showAllCoins, setShowAllCoins] = useState(false);
   const [uId, setUId] = useState(null);
   const [bookmarkedCoins, setBookmarkedCoins] = useState([]);
+  const navigate = useNavigate();
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -240,8 +242,8 @@ const Cryptocurrencies = ({ data, loading }) => {
                 Sorry, Cryptocurrencies page is not working
               </p>
               <a
-                href="/"
-                class="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                onClick={() => navigate("/")}
+                class="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
               >
                 Back to Homepage
               </a>

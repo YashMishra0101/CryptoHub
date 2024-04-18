@@ -5,6 +5,7 @@ import "./index.css";
 import toast, { Toaster } from "react-hot-toast";
 import { ProtectedRoute } from "./protectRoute/ProtectedRoute.jsx";
 
+
 import {
   Home,
   Cryptocurrencies,

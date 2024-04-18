@@ -3,8 +3,10 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import logo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+  const navigate = useNavigate();
   return (
     <div>
       <footer className="bg-white dark:bg-gray-900 mt-12 sm:mr-2 mr-0">
@@ -34,7 +36,10 @@ function Footer() {
                   </h2>
                   <ul className="font-medium cursor-pointer">
                     <li className="mb-2 text-white">
-                      <a href="/aboutus" className="hover:underline text-white">
+                      <a
+                        onClick={() => navigate("/aboutus")}
+                        className="hover:underline text-white"
+                      >
                         About us
                       </a>
                     </li>
