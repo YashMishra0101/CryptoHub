@@ -2,24 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { Provider } from "react-redux";
-import { store } from "./redux/store.jsx";
 import toast, { Toaster } from "react-hot-toast";
-
+import { ProtectedRoute } from "./protectRoute/ProtectedRoute.jsx";
 
 import {
   Home,
   Cryptocurrencies,
-  Chart,
   News,
   Login,
   SignUp,
   Bookmarks,
-  UserAccount,
   ResetPassword,
   CoinrankingApi,
   BingNewsApi,
-  AIBot
+  AIBot,
+  AboutUs,
+  PageNotFound,
 } from "./components/index.js";
 
 import {
@@ -29,26 +27,40 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<CoinrankingApi/>} />
+      <Route index element={<CoinrankingApi />} />
       <Route path="cryptocurrencies" element={<CoinrankingApi />} />
-      <Route path="chart" element={<CoinrankingApi/>} />
-      <Route path="news" element={<BingNewsApi/>} />
+      <Route path="news" element={<BingNewsApi />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="resetPassword" element={<ResetPassword />} />
-      <Route path="aibot" element={< AIBot />} />
-      <Route path="bookmarks" element={< Bookmarks />} />
+      <Route
+        path="aibot"
+        element={
+          <ProtectedRoute>
+            <AIBot />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="bookmarks"
+        element={
+          <ProtectedRoute>
+            <Bookmarks />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="aboutUs" element={<AboutUs />} />
+      <Route path="*" element={<PageNotFound />} />
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
+  <>
     <RouterProvider router={router} />
     <Toaster position="top-center" />
-  </Provider>
+  </>
 );

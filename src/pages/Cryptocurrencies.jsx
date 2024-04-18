@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import millify from "millify";
 import { FaSearchDollar, FaBookmark } from "react-icons/fa";
 import toast from "react-hot-toast";
+import Footer from "../components/Footer";
 import {
 	addDoc,
 	arrayUnion,
@@ -14,8 +15,8 @@ import {
 	updateDoc,
 } from "firebase/firestore";
 import { auth, fireDb } from "../firebase/FirebaseConfig";
-import { useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
+
 
 const Cryptocurrencies = ({ data, loading }) => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -92,7 +93,7 @@ const Cryptocurrencies = ({ data, loading }) => {
 
 	return (
 		<div className="w-screen overflow-hidden bg-gray-900 p-6 text-white ">
-			<h2 className="text-3xl font-bold text-center mb-8 hover:text-green-200 select-none">
+			<h2 className="text-3xl font-bold text-center mb-8 hover:text-green-300 cursor-pointer select-none">
 				<span className="hidden sm:block">
 					Explore the Top 50 Cryptocurrencies
 				</span>
@@ -204,6 +205,7 @@ const Cryptocurrencies = ({ data, loading }) => {
 					</div>
 				))}
 			</div>
+			<Footer/>
 		</div>
 	);
 };

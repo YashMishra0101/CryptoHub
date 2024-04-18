@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import Footer from "../components/Footer";
 
 const News = ({ data, loading }) => {
-  const [showFullDescription, setShowFullDescription] = useState(Array(data.data.length).fill(false));
+  const [showFullDescription, setShowFullDescription] = useState(
+    Array(data.data.length).fill(false)
+  );
 
   const toggleDescription = (index) => {
     const updatedShowFullDescription = [...showFullDescription];
@@ -29,7 +32,7 @@ const News = ({ data, loading }) => {
       <section className="bg-gray-900 text-white">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-lg text-center">
-            <h2 className="text-2xl font-bold sm:text-4xl hover:text-green-200">
+            <h2 className="text-2xl font-bold sm:text-4xl hover:text-green-300 select-none cursor-pointer">
               Top 50 Latest News about Cryptocurrencies
             </h2>
           </div>
@@ -52,21 +55,19 @@ const News = ({ data, loading }) => {
                 <h2 className="text-xl font-bold text-white mt-1">{`${value.title}.`}</h2>
 
                 <p className="mt-1 text-sm text-gray-300">
-                  {(showFullDescription[index] || value.description.length <= 100) ? 
-                    value.description
+                  {showFullDescription[index] || value.description.length <= 100
+                    ? value.description
                     : `${value.description.slice(0, 100)}...`}
-                        {value.description.length > 100 && (
-                  <button
-                    className="text-xs font-semibold text-blue-500 hover:underline cursor-pointer"
-                    onClick={() => toggleDescription(index)}
-                  >
-                    {showFullDescription[index] ? "See Less" : "See More"}
-                  </button>
-                )}
-
+                  {value.description.length > 100 && (
+                    <button
+                      className="text-xs font-semibold text-blue-500 hover:underline cursor-pointer"
+                      onClick={() => toggleDescription(index)}
+                    >
+                      {showFullDescription[index] ? "See Less" : "See More"}
+                    </button>
+                  )}
                 </p>
 
-            
                 <p className="mt-2 text-xs text-gray-500">
                   Published on {formatPublishedDate(value.createdAt)}
                 </p>
@@ -81,6 +82,7 @@ const News = ({ data, loading }) => {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };

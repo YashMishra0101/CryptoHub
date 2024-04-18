@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+const API_KEY= import.meta.env.VITE_Firebase_API_KEY;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBN_5QXi8sBfE0VB2dEsKbz6YDKThtDjHI",
+  apiKey:  API_KEY,
   authDomain: "cryptohub-fe600.firebaseapp.com",
   projectId: "cryptohub-fe600",
   storageBucket: "cryptohub-fe600.appspot.com",

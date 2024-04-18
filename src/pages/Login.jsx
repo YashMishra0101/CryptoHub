@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/FirebaseConfig";
 import toast from "react-hot-toast";
-
+import Footer from "../components/Footer";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -18,8 +18,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      localStorage.setItem("isLoggedIn", "true"); // Save login status in local storage
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); // Capture userCredential
+      localStorage.setItem("user", JSON.stringify(userCredential.user));
+      // Save login status in local storage
       toast.success("Login Successful");
       setIsLoggedIn(true); // Update login status state
       navigate("/");
@@ -28,6 +29,7 @@ const Login = () => {
       console.log(`Login failed: ${error.message}`);
     }
   };
+  
 
   return (
     <div>
@@ -107,7 +109,7 @@ const Login = () => {
                   type="submit"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-1"
                 >
-                  Sign in
+                  Log in
                 </button>
                 <p className="text-base font-light text-gray-500 dark:text-gray-400 cursor-pointer">
                   Don’t have an account yet ?{" "}
@@ -123,6 +125,9 @@ const Login = () => {
           </div>
         </div>
       </div>
+     <div className="md:-mt-32 -mt-28">
+     <Footer/>
+     </div>
     </div>
   );
 };

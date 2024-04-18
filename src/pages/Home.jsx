@@ -6,10 +6,7 @@ import { GoGraph } from "react-icons/go";
 import { FaCoins } from "react-icons/fa";
 import { FaExchangeAlt } from "react-icons/fa";
 import { BsCurrencyExchange } from "react-icons/bs";
-import { FaFacebookF } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import logo from "../assets/logo.png";
+import Footer from "../components/Footer";
 
 const Home = ({ data, newsData }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +51,7 @@ const Home = ({ data, newsData }) => {
   return (
     <div className="overflow-hidden bg-gray-900 text-white">
       <div className="container w-screen p-6 rounded-md shadow-md lg:mr-3">
-        <h1 className="text-2xl font-sans font-bold mb-6 text-center">
+        <h1 className="text-2xl font-sans font-bold mb-6 text-center hover:text-green-300 cursor-pointer select-none">
           Global Crypto Status
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -95,7 +92,7 @@ const Home = ({ data, newsData }) => {
 
       <div className="p-6 mt-4 ">
         <h2 className="mt-2 mb-5 font-bold text-center md:text-3xl text-2xl">
-          <span className="hidden sm:block">
+          <span className="hidden sm:block hover:text-green-300 cursor-pointer select-none">
             {" "}
             Top 12 Cryptocurrencies In The World
           </span>
@@ -187,115 +184,7 @@ const Home = ({ data, newsData }) => {
           ))}
         </div>
       </div>
-      <footer className="bg-white dark:bg-gray-900 mt-12">
-        <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-          <div className="md:flex md:justify-between">
-            <div className="mb-6 md:mb-0">
-              <a href="#" className="flex items-center">
-                <img src={logo} className="h-8 me-3" alt="FlowBite Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                  Cryptohub
-                </span>
-              </a>
-              <div className="mt-3 text-sm font-bold hidden sm:block leading-7 w-[50%]">
-                <p className="text-gray-400 font-medium">
-                  Explore live charts for various coins on this platform for
-                  live crypto data and daily news, staying updated with the
-                  latest trends.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Company
-                </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline">
-                      About us
-                    </a>
-                  </li>
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline">
-                      Business Contacts
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Market updates
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Follow us
-                </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline ">
-                      Github
-                    </a>
-                  </li>
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline">
-                      Linkedin
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Twitter
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Legal
-                </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline">
-                      Privacy Policy
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Terms &amp; Conditions
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-              © 2024{" "}
-              <a href="#" className="hover:underline">
-                CryptoHub™
-              </a>
-              . All Rights Reserved.
-            </span>
-            <div className="flex mt-4 sm:justify-center sm:mt-0 gap-4 text-lg">
-              <a href="#"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <FaFacebookF />
-              </a>
-              <a href="#"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-                <FaGithub />
-              </a>
-              <a href="#"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white mr-3">
-                <FaInstagram />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+    <Footer/>
     </div>
   );
 };

@@ -1,12 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import Markdown from "react-markdown";
-
+import Spinner from "../components/Spinner"; // Import Spinner component
+import Footer from "../components/Footer";
 const AIBot = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
 
-  const genAI = new GoogleGenerativeAI('AIzaSyCZ-YrC_xmiPzXl8TwtQyos5OAsCQzOLKo'); // Replace 'YOUR_API_KEY_HERE' with your actual API key
+  const API_KEY = import.meta.env.VITE_Geemini_API_KEY;
+
+  const genAI = new GoogleGenerativeAI(API_KEY);
 
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
@@ -14,10 +18,13 @@ const AIBot = () => {
     if (inputValue.trim() === "") return;
 
     try {
+      setLoading(true); // Set loading to true before sending message
+
       const prompt = inputValue;
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
+
       if (response?.text) {
         setChatHistory((prevChatHistory) => [
           ...prevChatHistory,
@@ -29,27 +36,54 @@ const AIBot = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error);
+    } finally {
+      setLoading(false); // Set loading to false after receiving response
     }
 
     setInputValue("");
   };
 
   return (
-    <div className="min-h-[39rem]  flex flex-col justify-between">
-      <h1 className="text-3xl text-white font-sans font-bold mb-6 text-center">
-          AI Chat Assistance
-        </h1>
+    <div
+      className="flex flex-col justify-between min-h-screen"
+      style={{ minHeight: `calc(100vh - 74px)` }}
+    >
+      <h1 className="text-3xl text-white font-sans font-bold mt-6 text-center select-none">
+        <span className="hover:text-green-400 transition duration-300 cursor-pointer">
+          AI Chat Assistance -
+        </span>
+        <span className="text-sm font-normal text-gray-400 ml-1 hover:text-green-400 transition duration-300 cursor-pointer">
+          Powered by Google Gemini
+        </span>
+      </h1>
+
       <div className="flex-grow p-4 overflow-y-auto">
-        
         {chatHistory.map((message, index) => (
-          <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
-            <div className={`inline-block px-4 py-2 rounded-lg ${message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-300"}`}>
+          <div
+            key={index}
+            className={`mb-4 ${
+              message.role === "user" ? "text-right" : "text-left"
+            }`}
+          >
+            <div
+              className={`inline-block px-4 py-2 rounded-lg ${
+                message.role === "user"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-300"
+              }`}
+            >
               <Markdown>{message.content}</Markdown>
             </div>
           </div>
         ))}
+        {loading && (
+          <div className="min-h-screen min-w-full flex justify-center items-center relative bottom-28">
+            <Spinner />
+          </div>
+        )}{" "}
+        {/* Show spinner when loading */}
       </div>
-      <div className="p-4 flex items-center">
+      <div className="p-4 flex items-center relative bottom-0 min-w-full">
         <input
           type="text"
           placeholder="Type your query..."
@@ -63,7 +97,7 @@ const AIBot = () => {
           }}
         />
         <button
-          className="ml-2 px-4 py-2 bg-blue-500 4 text-white rounded-lg focus:outline-none"
+          className="ml-2 px-4 py-2 bg-blue-600 4 text-white rounded-lg focus:outline-none hover:bg-blue-700"
           onClick={sendMessage}
         >
           Send

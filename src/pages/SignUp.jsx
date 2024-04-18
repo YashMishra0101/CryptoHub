@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDb } from "../firebase/FirebaseConfig";
 import { collection, doc, setDoc } from "firebase/firestore"; // Import firestore functions for writing data
+import Footer from "../components/Footer";
 
 import toast from "react-hot-toast";
 
@@ -53,12 +54,12 @@ const SignUp = () => {
 	};
 
 	return (
-		<div className="bg-gray-900 min-h-[43rem]">
+		<div className="bg-gray-900 min-h-[43rem] ">
 			<div className="flex flex-col items-center justify-center px-6 py-5 md:py-8 mx-auto md:h-screen lg:py-0 relative top-12 ">
 				<div className="w-full rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700 ">
 					<div className="pr-4 pl-4 space-y-4 pt-5 pb-3">
 						<h1 className="text-center font-bold text-2xl text-white pt-2">
-							Create account
+							Create Your account
 						</h1>
 						<form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
 							<div>
@@ -166,6 +167,9 @@ const SignUp = () => {
 						</form>
 					</div>
 				</div>
+			</div>
+			<div className="mt-32">
+			<Footer/>
 			</div>
 		</div>
 	);

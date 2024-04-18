@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebase/FirebaseConfig";
+import toast from "react-hot-toast";
 
 const ResetPassword = () => {
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Password reset email sent. Please check your inbox.", { duration: 3000 });
+      navigate("/");
+    } catch (error) {
+      toast.error("Failed to send password reset email. Please try again.", { duration: 3000 });
+      console.log(`Password reset failed: ${error.message}`);
+    }
+  };
+
   return (
     <div>
       <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
@@ -10,10 +29,7 @@ const ResetPassword = () => {
               <h1 className="text-center font-bold text-2xl text-white">
                 Reset Your Password
               </h1>
-              <form
-                className="space-y-4 md:space-y-6"
-                onSubmit={() => navigate("/")}
-              >
+              <form className="space-y-4 md:space-y-6" onSubmit={handleResetPassword}>
                 <div className="mt-5">
                   <label
                     htmlFor="email"
@@ -27,6 +43,8 @@ const ResetPassword = () => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@gmail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>

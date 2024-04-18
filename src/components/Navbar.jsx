@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import { FiMenu } from "react-icons/fi";
-import { auth } from "../firebase/FirebaseConfig";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../src/firebase/FirebaseConfig";
+import { toast } from "react-hot-toast";
+import logo from "../assets/logo.png";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,18 +13,23 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    // Firebase authentication status change listener
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsLoggedIn(true);
+        setIsLoggedIn(true); // User is signed in
+        localStorage.setItem("user", JSON.stringify(user)); // Save user data to local storage
       } else {
-        setIsLoggedIn(false);
+        setIsLoggedIn(false); // User is signed out
+        localStorage.removeItem("user"); // Remove user data from local storage
       }
     });
-    return () => unsubscribe();
+
+    return () => unsubscribe(); // Cleanup function to unsubscribe from listener
+
   }, []);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prevState => !prevState); // Using functional update to toggle isOpen
   };
 
   const closeMenu = () => {
@@ -29,15 +37,30 @@ const NavBar = () => {
   };
 
   const logout = () => {
-    auth
-      .signOut()
+    signOut(auth)
       .then(() => {
-        setIsLoggedIn(false);
-        navigate("/login");
+        setIsLoggedIn(false); // Update isLoggedIn state
+        localStorage.removeItem("user"); // Remove user data from local storage
+        closeMenu(); // Close menu after logout
+        toast.success("Successfully logged out"); // Show success toast
       })
       .catch((error) => {
-        console.error("Error logging out:", error.message);
+        console.error("Logout failed:", error);
+        toast.error("Logout failed. Please try again."); // Show error toast
       });
+  };
+
+  const handleNavLinkClick = () => {
+    closeMenu();
+  };
+
+  const handleAiHelpClick = () => {
+    if (!isLoggedIn) {
+      toast.error("Please log in to access AI Help"); // Show error toast
+      navigate("/login")
+    } else {
+      navigate("/aibot");
+    }
   };
 
   return (
@@ -72,6 +95,19 @@ const NavBar = () => {
           >
             News
           </NavLink>
+          <NavLink
+            className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+            to="/aibot" onClick={handleAiHelpClick}
+          >
+            AI-Help
+          </NavLink>
+          <NavLink
+            className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+            to="/aboutUs"
+          >
+            About us
+          </NavLink>
+
           {!isLoggedIn && (
             <>
               <NavLink
@@ -88,29 +124,24 @@ const NavBar = () => {
               </NavLink>
             </>
           )}
-          <NavLink
-            className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-            to="/aibot"
-            >
-            AI-Help
-          </NavLink>
-        {isLoggedIn && (
-          <>
-            <NavLink
-              className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-              to="bookmarks"
-            >
-              Bookmark
-            </NavLink>
-            <NavLink
-              className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-              to="/"
-              onClick={logout}
-            >
-              Logout
-            </NavLink>
-          </>
-        )}
+          {isLoggedIn && (
+            <>
+              <NavLink
+                className="py-2 px-3 relative top-[0.68rem] md:top-0  hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+                to="bookmarks"
+              >
+                Bookmark
+              </NavLink>
+             
+              <NavLink
+                className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+                to="/"
+                onClick={logout}
+              >
+                Logout
+              </NavLink>
+            </>
+          )}
         </div>
         <button
           type="button"
@@ -122,7 +153,7 @@ const NavBar = () => {
         <div
           className={`${
             isOpen ? "block" : "hidden"
-          } w-full md:hidden mt-4 border rounded-md font-medium text-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700`}
+          } w-full md:hidden mt-4 border rounded-md font-medium text-base md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 pb-2 `}
           id="navbar-default"
         >
           <NavLink
@@ -141,29 +172,34 @@ const NavBar = () => {
           </NavLink>
           <NavLink
             className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
-            to="exchange"
-            onClick={closeMenu}
-          >
-            Exchange
-          </NavLink>
-          <NavLink
-            className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
             to="news"
             onClick={closeMenu}
           >
             News
           </NavLink>
+          <NavLink
+            className="py-2 px-3 relative top-[0.50rem] hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+            to="/aibot" onClick={handleAiHelpClick}
+          >
+            AI-Help
+          </NavLink>
           {isLoggedIn && (
             <>
               <NavLink
-                className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
+                className="block py-2 px-3 relative top-[1.1rem] hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
                 to="bookmarks"
                 onClick={closeMenu}
               >
                 Bookmark
               </NavLink>
               <NavLink
-                className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
+                className="py-2 px-3 relative top-[1.3rem] hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
+                to="/aboutus"
+              >
+                About Us
+              </NavLink>
+              <NavLink
+                className="block py-2 px-3 relative top-[1.3rem] mb-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
                 to="/"
                 onClick={() => {
                   closeMenu();
@@ -177,14 +213,21 @@ const NavBar = () => {
           {!isLoggedIn && (
             <>
               <NavLink
-                className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
+                className="block py-2 relative top-[0.75rem] px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
                 to="/login"
                 onClick={closeMenu}
               >
                 Login
               </NavLink>
               <NavLink
-                className="block py-2 px-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
+                className="block py-2 px-3 relative top-[0.70rem] hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
+                to="/aboutus"
+                onClick={closeMenu}
+              >
+                About Us
+              </NavLink>
+              <NavLink
+                className="block py-2 px-3 relative top-[0.70rem] mb-3 hover:bg-transparent md:border-0 md:p-0 text-white hover:text-blue-500"
                 to="/signup"
                 onClick={closeMenu}
               >
@@ -192,12 +235,6 @@ const NavBar = () => {
               </NavLink>
             </>
           )}
-          <NavLink
-            className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-            to="/aibot"
-          >
-            AI-Help
-          </NavLink>
         </div>
       </div>
     </nav>
