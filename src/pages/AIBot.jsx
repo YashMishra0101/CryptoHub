@@ -48,7 +48,7 @@ const AIBot = () => {
       className="flex flex-col justify-between min-h-screen"
       style={{ minHeight: `calc(100vh - 74px)` }}
     >
-      <h1 className="text-3xl text-white font-sans font-bold mt-6 text-center select-none">
+      <h1 className="text-3xl text-white font-sans font-bold mt-6 text-center select-none w-[95%] ml-2 md:ml-0">
         <span className="hover:text-green-400 transition duration-300 cursor-pointer">
           AI Chat Assistance -
         </span>

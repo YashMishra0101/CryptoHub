@@ -51,7 +51,7 @@ const Home = ({ data, newsData }) => {
   return (
     <div className="overflow-hidden bg-gray-900 text-white">
       {!loading && !coins ? (
-        <section className="bg-white dark:bg-gray-900 min-h-screen">
+        <section className="bg-white dark:bg-gray-900 min-h-screen w-full">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center">
               <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-blue-600 dark:text-blue-500">

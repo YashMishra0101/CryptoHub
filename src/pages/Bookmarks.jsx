@@ -60,7 +60,7 @@ const Bookmarks = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-900 p-6 text-white">
+    <div className="min-h-screen overflow-hidden bg-gray-900 p-6 text-white">
       <h2 className="text-3xl font-bold text-center mb-8 hover:text-green-400 transition duration-300 cursor-pointer select-none">
         Bookmarked Cryptocurrencies
       </h2>
