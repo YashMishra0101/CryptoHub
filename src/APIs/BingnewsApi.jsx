@@ -11,8 +11,6 @@ const BingnewsApi = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("API KEY in BingnewsApi:", BING_NEWS_API_KEY);
-
     const fetchData = async () => {
       const options = {
         method: "GET",
@@ -26,7 +24,6 @@ const BingnewsApi = () => {
       try {
         const response = await axios.request(options);
         setData(response?.data);
-        console.log("BingnewsApi Data:", response?.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -43,9 +40,9 @@ const BingnewsApi = () => {
         {loading ? (
           <Spinner />
         ) : window.location.pathname === "/news" ? (
-          <News data={data}/>
+          <News data={data} />
         ) : (
-          <Home newsData={data}/>
+          <Home newsData={data} />
         )}
       </div>
     </div>

@@ -184,7 +184,7 @@ const Home = ({ data, newsData }) => {
           ))}
         </div>
       </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 };

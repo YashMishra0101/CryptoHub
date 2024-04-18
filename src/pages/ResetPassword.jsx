@@ -12,10 +12,14 @@ const ResetPassword = () => {
     e.preventDefault();
     try {
       await sendPasswordResetEmail(auth, email);
-      toast.success("Password reset email sent. Please check your inbox.", { duration: 3000 });
+      toast.success("Password reset email sent. Please check your inbox.", {
+        duration: 3000,
+      });
       navigate("/");
     } catch (error) {
-      toast.error("Failed to send password reset email. Please try again.", { duration: 3000 });
+      toast.error("Failed to send password reset email. Please try again.", {
+        duration: 3000,
+      });
       console.log(`Password reset failed: ${error.message}`);
     }
   };
@@ -29,7 +33,10 @@ const ResetPassword = () => {
               <h1 className="text-center font-bold text-2xl text-white">
                 Reset Your Password
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleResetPassword}>
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleResetPassword}
+              >
                 <div className="mt-5">
                   <label
                     htmlFor="email"

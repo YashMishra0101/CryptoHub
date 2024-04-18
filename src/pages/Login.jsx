@@ -18,7 +18,11 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password); // Capture userCredential
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      ); // Capture userCredential
       localStorage.setItem("user", JSON.stringify(userCredential.user));
       // Save login status in local storage
       toast.success("Login Successful");
@@ -29,7 +33,6 @@ const Login = () => {
       console.log(`Login failed: ${error.message}`);
     }
   };
-  
 
   return (
     <div>
@@ -125,9 +128,9 @@ const Login = () => {
           </div>
         </div>
       </div>
-     <div className="md:-mt-32 -mt-28">
-     <Footer/>
-     </div>
+      <div className="md:-mt-32 -mt-28">
+        <Footer />
+      </div>
     </div>
   );
 };

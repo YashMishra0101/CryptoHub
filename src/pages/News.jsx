@@ -82,7 +82,7 @@ const News = ({ data, loading }) => {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

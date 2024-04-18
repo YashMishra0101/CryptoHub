@@ -25,11 +25,10 @@ const NavBar = () => {
     });
 
     return () => unsubscribe(); // Cleanup function to unsubscribe from listener
-
   }, []);
 
   const toggleMenu = () => {
-    setIsOpen(prevState => !prevState); // Using functional update to toggle isOpen
+    setIsOpen((prevState) => !prevState); // Using functional update to toggle isOpen
   };
 
   const closeMenu = () => {
@@ -40,9 +39,9 @@ const NavBar = () => {
     signOut(auth)
       .then(() => {
         setIsLoggedIn(false); // Update isLoggedIn state
-        localStorage.removeItem("user"); // Remove user data from local storage
+        localStorage.clear("user"); // Remove user data from local storage
         closeMenu(); // Close menu after logout
-        toast.success("Successfully logged out"); // Show success toast
+        toast.success("Logout Successful"); // Show success toast
       })
       .catch((error) => {
         console.error("Logout failed:", error);
@@ -56,8 +55,8 @@ const NavBar = () => {
 
   const handleAiHelpClick = () => {
     if (!isLoggedIn) {
-      toast.error("Please log in to access AI Help"); // Show error toast
-      navigate("/login")
+      toast.error("Please Login To Access AI Help"); // Show error toast
+      navigate("/login");
     } else {
       navigate("/aibot");
     }
@@ -97,7 +96,8 @@ const NavBar = () => {
           </NavLink>
           <NavLink
             className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-            to="/aibot" onClick={handleAiHelpClick}
+            to="/aibot"
+            onClick={handleAiHelpClick}
           >
             AI-Help
           </NavLink>
@@ -132,7 +132,7 @@ const NavBar = () => {
               >
                 Bookmark
               </NavLink>
-             
+
               <NavLink
                 className="py-2 px-3 hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
                 to="/"
@@ -179,7 +179,13 @@ const NavBar = () => {
           </NavLink>
           <NavLink
             className="py-2 px-3 relative top-[0.50rem] hover:bg-transparent border-b-2 border-transparent text-white hover:text-blue-500"
-            to="/aibot" onClick={handleAiHelpClick}
+            to="/aibot"
+            onClick={() => {
+              {
+                toggleMenu();
+                handleAiHelpClick;
+              }
+            }}
           >
             AI-Help
           </NavLink>
