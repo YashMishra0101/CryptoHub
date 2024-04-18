@@ -183,7 +183,7 @@ const NavBar = () => {
             onClick={() => {
               {
                 toggleMenu();
-                handleAiHelpClick;
+                handleAiHelpClick();
               }
             }}
           >

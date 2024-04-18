@@ -175,10 +175,23 @@ const Home = ({ data, newsData }) => {
                 </p>
                 <p className="text-gray-300 font-bold text-base">
                   Daily Changes:{" "}
-                  <span className="text-white text-base leading-6">
-                    {millify(coin.change)}%
+                  <span
+                    className={`text-base leading-6 ${
+                      coin.change < 0 ? "text-red-500" : "text-green-500"
+                    }`}
+                  >
+                    {coin.change < 0 ? "-" : "+"}
+                    {millify(Math.abs(coin.change || 0))}%
                   </span>
                 </p>
+                <a
+                  href={coin.coinrankingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-bold inline-block transition duration-300 hover:text-blue-500 transform hover:scale-105 py-1"
+                >
+                  View More Details
+                </a>
               </div>
             </div>
           ))}
