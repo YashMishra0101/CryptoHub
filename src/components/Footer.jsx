@@ -26,76 +26,86 @@ function Footer() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4 w-full">
-              <div>
-                <h2 className="mb-6 text-sm font-semibold  uppercasetext-white text-white">
-                  Company
-                </h2>
-                <ul className="font-medium  cursor-pointer">
-                  <li className="mb-2 text-white">
-                    <a href="/aboutus" className="hover:underline text-white">
-                      About us
-                    </a>
-                  </li>
-                  <li className="mb-2 text-white">
-                    <a className="hover:underline">Business Contacts</a>
-                  </li>
-                  <li>
-                    <a className="hover:underline text-white">Market updates</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-white">
-                  Follow us
-                </h2>
-                <ul className=" font-medium  cursor-pointer">
-                  <li className="mb-2">
-                    <a className="hover:underline text-white">Github</a>
-                  </li>
-                  <li className="mb-2">
-                    <a className="hover:underline text-white">Linkedin</a>
-                  </li>
-                  <li>
-                    <a className="hover:underline text-white">Twitter</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  Legal
-                </h2>
-                <ul className=" font-medium  cursor-pointer">
-                  <li className="mb-2">
-                    <a className="hover:underline text-white">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a className="hover:underline text-white">
-                      Terms &amp; Conditions
-                    </a>
-                  </li>
-                  <li>
-                    <a className="hover:underline text-white relative top-2">
-                      Support
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              {/* Download section */}
-              <div>
-                <h3 className="text-lg font-semibold text-white">Download</h3>
-                <ul className="mt-4  cursor-pointer">
-                  <li>
-                    <a className="hover:underline text-white">Android & iOS</a>
-                  </li>
+            <div className="flex justify-center items-center ml-6 md:ml-0 lg:ml-0 w-full">
+              <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4 w-full">
+                <div>
+                  <h2 className="mb-6 text-sm font-semibold uppercase text-white">
+                    Company
+                  </h2>
+                  <ul className="font-medium cursor-pointer">
+                    <li className="mb-2 text-white">
+                      <a href="/aboutus" className="hover:underline text-white">
+                        About us
+                      </a>
+                    </li>
+                    <li className="mb-2 text-white">
+                      <a className="hover:underline text-white">
+                        Business Contacts
+                      </a>
+                    </li>
+                    <li>
+                      <a className="hover:underline text-white">
+                        Market updates
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="mb-6 text-sm font-semibold text-white">
+                    Follow us
+                  </h2>
+                  <ul className="font-medium cursor-pointer">
+                    <li className="mb-2">
+                      <a className="hover:underline text-white">Github</a>
+                    </li>
+                    <li className="mb-2">
+                      <a className="hover:underline text-white">Linkedin</a>
+                    </li>
+                    <li>
+                      <a className="hover:underline text-white">Twitter</a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                    Legal
+                  </h2>
+                  <ul className="font-medium cursor-pointer">
+                    <li className="mb-2">
+                      <a className="hover:underline text-white">
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a className="hover:underline text-white">
+                        Terms &amp; Conditions
+                      </a>
+                    </li>
+                    <li>
+                      <a className="hover:underline text-white relative top-2">
+                        Support
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {/* Download section */}
+                <div>
+                  <h3 className="text-lg font-semibold text-white">Download</h3>
+                  <ul className="mt-4 cursor-pointer">
+                    <li>
+                      <a className="hover:underline text-white">
+                        Android & iOS
+                      </a>
+                    </li>
 
-                  <li className="mt-2 hover:underline text-white">
-                    <a>Windows</a>
-                  </li>
-                  <li className="mt-2 hover:underline text-white ">
-                    <a>MacOS</a>
-                  </li>
-                </ul>
+                    <li className="mt-2 hover:underline text-white">
+                      <a>Windows</a>
+                    </li>
+                    <li className="mt-2 hover:underline text-white">
+                      <a>MacOS</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

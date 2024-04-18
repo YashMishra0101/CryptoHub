@@ -19,7 +19,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 const Cryptocurrencies = ({ data, loading }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCoins, setFilteredCoins] = useState(data.data.coins);
+  const [filteredCoins, setFilteredCoins] = useState(data?.data?.coins || []);
   const [searchError, setSearchError] = useState(false);
   const [showAllCoins, setShowAllCoins] = useState(false);
   const [uId, setUId] = useState(null);
@@ -38,7 +38,7 @@ const Cryptocurrencies = ({ data, loading }) => {
   };
 
   const handleShowAllCoins = () => {
-    setFilteredCoins(data.data.coins);
+    setFilteredCoins(data?.data?.coins || []);
     setShowAllCoins(false);
     setSearchError(false);
     setSearchQuery("");
@@ -150,79 +150,105 @@ const Cryptocurrencies = ({ data, loading }) => {
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-        {filteredCoins.map((coin, index) => (
-          <div
-            key={index}
-            className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative"
-          >
-            <div className="absolute top-2 right-2 flex items-center">
-              <FaBookmark
-                onClick={() => handleBookmark(coin)}
-                className={`text-gray-400 cursor-pointer ${
-                  bookmarkedCoins.some((item) => item.coinid === coin?.uuid)
-                    ? "text-green-400 hover:text-green-500"
-                    : "text-gray-400"
-                }`}
-              />
-            </div>
-            <div className="mt-1 mb-2 mx-auto">
-              <img
-                className="object-cover border-2 border-gray-800 rounded-full w-20 h-20"
-                src={coin?.iconUrl || ""}
-                alt="coin-logo"
-              />
-            </div>
-            <div className="mt-3 px-6 pr-4 leading-loose flex-1">
-              <p className="font-semibold text-2xl mb-2">{coin?.name || ""}</p>
-              {coin && (
-                <>
-                  <p className="text-white text-base font-bold">
-                    Price:{" "}
-                    <span className="text-white text-base leading-6">
-                      ${millify(coin?.price || 0)}
-                    </span>
-                  </p>
-                  <p className="text-gray-300 text-base font-bold">
-                    Rank:{" "}
-                    <span className="text-white text-base">
-                      {coin?.rank || ""}
-                    </span>
-                  </p>
-                  <p className="text-gray-300 text-base font-bold">
-                    Market Cap:{" "}
-                    <span className="text-white text-base leading-6">
-                      ${millify(coin?.marketCap || 0)}
-                    </span>
-                  </p>
-                  <p className="text-gray-300 font-bold text-base">
-                    Daily Changes:{" "}
-                    <span
-                      className={`text-base leading-6 ${
-                        coin?.change < 0 ? "text-red-500" : "text-green-500"
-                      }`}
+        {filteredCoins &&
+          filteredCoins.map((coin, index) => (
+            <div
+              key={index}
+              className="rounded-xl border border-gray-800 p-3 bg-gray-800 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 flex flex-col relative"
+            >
+              <div className="absolute top-2 right-2 flex items-center">
+                <FaBookmark
+                  onClick={() => handleBookmark(coin)}
+                  className={`text-gray-400 cursor-pointer ${
+                    bookmarkedCoins.some((item) => item.coinid === coin?.uuid)
+                      ? "text-green-400 hover:text-green-500"
+                      : "text-gray-400"
+                  }`}
+                />
+              </div>
+              <div className="mt-1 mb-2 mx-auto">
+                <img
+                  className="object-cover border-2 border-gray-800 rounded-full w-20 h-20"
+                  src={coin?.iconUrl || ""}
+                  alt="coin-logo"
+                />
+              </div>
+              <div className="mt-3 px-6 pr-4 leading-loose flex-1">
+                <p className="font-semibold text-2xl mb-2">
+                  {coin?.name || ""}
+                </p>
+                {coin && (
+                  <>
+                    <p className="text-white text-base font-bold">
+                      Price:{" "}
+                      <span className="text-white text-base leading-6">
+                        ${millify(coin?.price || 0)}
+                      </span>
+                    </p>
+                    <p className="text-gray-300 text-base font-bold">
+                      Rank:{" "}
+                      <span className="text-white text-base">
+                        {coin?.rank || ""}
+                      </span>
+                    </p>
+                    <p className="text-gray-300 text-base font-bold">
+                      Market Cap:{" "}
+                      <span className="text-white text-base leading-6">
+                        ${millify(coin?.marketCap || 0)}
+                      </span>
+                    </p>
+                    <p className="text-gray-300 font-bold text-base">
+                      Daily Changes:{" "}
+                      <span
+                        className={`text-base leading-6 ${
+                          coin?.change < 0 ? "text-red-500" : "text-green-500"
+                        }`}
+                      >
+                        {coin?.change < 0 ? "-" : "+"}
+                        {millify(Math.abs(coin?.change || 0))}%
+                      </span>
+                    </p>
+                    {/* Displaying the UUID */}
+                    <p className="text-gray-300 font-bold text-base ">
+                      UUID: {coin?.uuid || ""}
+                    </p>
+                    <a
+                      href={coin.coinrankingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 font-bold inline-block transition duration-300 hover:text-blue-500 transform hover:scale-105 py-1"
                     >
-                      {coin?.change < 0 ? "-" : "+"}
-                      {millify(Math.abs(coin?.change || 0))}%
-                    </span>
-                  </p>
-                  {/* Displaying the UUID */}
-                  <p className="text-gray-300 font-bold text-base ">
-                    UUID: {coin?.uuid || ""}
-                  </p>
-                  <a
-                    href={coin.coinrankingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 font-bold inline-block transition duration-300 hover:text-blue-500 transform hover:scale-105 py-1"
-                  >
-                    View More Details
-                  </a>
-                </>
-              )}
+                      View More Details
+                    </a>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+      </div>
+      {!data?.data?.length && !loading && (
+        <div class="w-full md:-mt-16 -mt-16 lg:-mt-20">
+          <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center">
+              <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-blue-600 dark:text-blue-500">
+                404
+              </h1>
+              <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
+                API is not working
+              </p>
+              <p class="mb-4 text-lg text-center font-light text-gray-500 dark:text-gray-400">
+                Sorry, Cryptocurrencies page is not working
+              </p>
+              <a
+                href="/"
+                class="inline-flex text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+              >
+                Back to Homepage
+              </a>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
       <Footer />
     </div>
   );

@@ -15,24 +15,24 @@ const AboutUs = () => {
             <p class="mb-4">
               At CryptoHub, our mission is to provide a comprehensive
               cryptocurrency monitoring platform where users can access
-              real-time data, stay updated with the latest news, and interact
-              with our AI-powered chat assistance.
+              real-time data stay updated with the latest news and interact with
+              our AI-powered chat assistance.
             </p>
             <p>
               We strive to empower users by offering a seamless browsing
               experience, enabling them to monitor top cryptocurrencies, access
-              global cryptocurrency statistics, and stay informed about
+              global cryptocurrency statistics and stay informed about
               cryptocurrency trends worldwide.
             </p>
           </div>
           <div class="grid grid-cols-2 gap-4 mt-8">
             <img
-              class="w-full rounded-lg"
+              class="w-full rounded-lg md:h-[18rem]"
               src={imageOne}
               alt="office content 1"
             />
             <img
-              class="md:mt-5 mt-10 w-full md:h-[19rem] lg:mt-10 rounded-lg"
+              class="md:mt-36 mt-20 w-full md:h-[18rem] lg:mt-16 rounded-lg"
               src={imageTwo}
               alt="office content 2"
             />
