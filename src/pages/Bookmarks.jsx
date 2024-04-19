@@ -31,7 +31,7 @@ const Bookmarks = () => {
     const fetchBookmarkedCoins = async () => {
       if (uId) {
         onSnapshot(doc(fireDb, "users", uId), (doc) => {
-          setBookmarkedCoins(doc.data()?.bookmarks);
+          setBookmarkedCoins(doc.data()?.bookmarks || []); // Ensure default value is an empty array if no bookmarks are available
           setLoading(false); // Set loading to false after fetching data
         });
       }

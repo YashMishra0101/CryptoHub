@@ -42,7 +42,8 @@ const News = ({ data, loading }) => {
                 API is not working
               </p>
               <p className="mb-4 text-lg text-center font-light text-gray-500 dark:text-gray-400">
-                Sorry, News page is not working
+                Sorry, <span className="font-semibold text-blue-700">News</span>{" "}
+                page is not working
               </p>
               <a
                 onClick={() => navigate("/")}

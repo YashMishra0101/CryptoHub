@@ -91,7 +91,7 @@ const Home = ({ data, newsData }) => {
               "Global Crypto Status"
             )}
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
               <p className="text-sm font-semibold text-white">
                 Total Cryptocurrencies <FaCoins />
@@ -100,14 +100,7 @@ const Home = ({ data, newsData }) => {
                 {millify(stats?.totalCoins)}
               </p>
             </div>
-            <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
-              <p className="text-sm font-semibold text-white ">
-                Total Markets <GoGraph />
-              </p>
-              <p className="text-3xl text-green-700 font-medium">
-                ${millify(stats?.totalMarkets)}
-              </p>
-            </div>
+
             <div className="hover:bg-gray-700 transition duration-300 ease-in-out bg-gray-800 p-4 rounded-md shadow-md text-center">
               <p className="text-sm font-semibold text-white ">
                 Total Exchanges <FaExchangeAlt />

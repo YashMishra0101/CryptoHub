@@ -43,7 +43,7 @@ const SignUp = () => {
         });
 
         toast.success("Signup Successful");
-        navigate("/login");
+        navigate("/");
       } catch (error) {
         toast.error("Enter Valid Detail");
         console.error(`Signup failed: ${error.message}`);
