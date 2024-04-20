@@ -1,9 +1,4 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Type = "text/html"
-
 [[redirects]]
-  source = "/(.*)"
-  destination = "/index.html"
-  statusCode = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
