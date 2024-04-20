@@ -63,7 +63,8 @@ const Home = ({ data, newsData }) => {
                 API is not working
               </p>
               <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-                Sorry, Home page is not working
+                Sorry,<span className="font-semibold text-blue-700">Home</span>{" "}
+                page is not working
               </p>
               <a
                 onClick={() => navigate("/aboutus")}
