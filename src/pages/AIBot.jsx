@@ -52,7 +52,7 @@ const AIBot = () => {
         <span className="hover:text-green-400 transition duration-300 cursor-pointer">
           AI Chat Assistance -
         </span>
-        <span className="text-sm font-normal text-gray-400 ml-1 hover:text-green-400 transition duration-300 cursor-pointer">
+        <span className="text-sm font-normal text-green-400 transition duration-300 cursor-pointer">
           Powered by Google Gemini
         </span>
       </h1>
