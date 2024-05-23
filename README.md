@@ -34,6 +34,7 @@ To see a live demo of the project, please visit : https://digitalcryptohub.netli
 - React
 - React Router
 - Axios
+- Firebase
 
 
 ## Contributing
