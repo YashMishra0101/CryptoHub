@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDb } from "../firebase/FirebaseConfig";
 import { collection, doc, setDoc } from "firebase/firestore"; // Import firestore functions for writing data
 import Footer from "../components/Footer";
-
 import toast from "react-hot-toast";
 
 const SignUp = () => {
