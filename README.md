@@ -6,7 +6,7 @@
 
 <img src="src/assets/Screenshot (400).png">
 
-<img src="src/assets/Screenshot (401).png">
+<img src="src/assets/Screenshot (399).png">
 
 
 Built with HTML5, Tailwind CSS, React.js, Firebase, CoinRanking API, and Cryptocurrencies News API.
