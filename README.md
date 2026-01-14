@@ -9,7 +9,7 @@
 <img src="src/assets/Screenshot (399).png">
 
 
-Built with HTML5, Tailwind CSS, React.js, Firebase, CoinRanking API, and Cryptocurrencies News API.
+Built with HTML5, Tailwind CSS, React.js, Firebase, CoinRanking API and Cryptocurrencies News API.
 
 
 ## A comprehensive cryptocurrency platform featuring:
